@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My mobile Page</title>
+    <link rel="stylesheet" href="themes/mytheme.css" />
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+    <div data-role="page" id="page1" data-theme="d">
+        <div data-role="header">
+            <h1>My Portfolio app</h1>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page1" data-icon="camera">HOME</a></li>
+                    <li><a href="#page2" data-icon="grid">About</a></li>
+                </ul>
+
+            </div>
+        </div>
+        <div data-role="main" class="ui-content">
+            <h1>Hello world</h1>
+            <!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Veniam commodi ab, amet, accusantium consequuntur veritatis suscipit
+                maxime dolores dignissimos iusto eos doloribus quos non quibusdam ea
+                optio modi est autem?</p> -->
+            <!-- <a href="#page2" data-transition="flip">Page 2</a> -->
+            <div data-role="collapsible">
+                <h1>Past Work</h1>
+                <p>Its my last work</p>
+            </div>
+            <div data-role="collapsible">
+                <h1>Education</h1>
+                <p>I am pursuing engineering..</p>
+
+            </div>
+        </div>
+        <div data-role="footer">
+            <h2>&copy; Zaware Prajwal Nanasaheb 2022</h2>
+        </div>
+    </div>
+
+    <div data-role="page" id="page2" data-theme="d">
+        <div data-role="header">
+            <h1>My Second page</h1>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page1" data-icon="camera">HOME</a></li>
+                    <li><a href="#page2" data-icon="grid">About</a></li>
+                </ul>
+
+            </div>
+        </div>
+        <div data-role="main" class="ui-content">
+            <!-- <h1>Hello world</h1> -->
+            <!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam commodi ab, amet, accusantium
+                consequuntur veritatis suscipit maxime dolores dignissimos iusto eos doloribus quos non quibusdam ea
+                optio modi est autem?</p> -->
+            <!-- <a href="#page1">Page 1</a> -->
+            <h1>Contact me</h1>
+            <form>
+                <label for="essay">Tell us what do you think</label>
+                <textarea name="essay" id="essay" text-color="black"
+                    placeholder="Tell us how great we are..."></textarea>
+                <label for="rate">Rate us out of 10</label>
+                <input type="range" name="rate" id="rate" min="0" max="10">
+                <input type="submit" name="go" id="go" value="Rate my app">
+            </form>
+        </div>
+        <div data-role="footer">
+            <h2>&copy; Zaware Prajwal Nanasaheb2022</h2>
+        </div>
+    </div>
+</body>
+
+</html>

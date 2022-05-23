@@ -1,0 +1,185 @@
+<!-- Assignment No. &Program Title	:	1 (B) Write a javascript program to get the user registration data and push to array/local storage with AJAX POST method and data list in new page -->
+
+<!-- Implementation (Source Code, Input and
+Output)	:	Beforesubmittingtheassignmentonline,Ithoroughlylearnedfundamental conceptsand/orlogicofalltheprogrammingassignments.Inaddition,Ihave ensured correctness of source code, executed it and tested input(s)and
+output(s). Source Code with result enclosed. -->
+
+<!-- Conclusion	:	 Thus, javascript program to get the user registration data and push to array/local storage with AJAX POST method and data list in new page. -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Student Registration Form</title>
+    <script>
+        $(document).ready(function () {
+  // getData();
+
+  $("#btnAddStudent").click(function () {
+    //collect student data from student form
+    function getStudentData() {
+      let date = new Date($("#dob").val());
+      day = date.getDate();
+      month = date.getMonth() + 1; //jan - 0, feb-1, ...dec-11
+      year = date.getFullYear();
+      let dob = [day, month, year].join("/"); //28/01/2022
+
+      let selectedDate = new Date($("#registrationDate").val());
+      day = selectedDate.getDate();
+      month = date.getMonth() + 1;
+      year = date.getFullYear();
+      let registrationDate = [day, month, year].join("/");
+
+      let student = {
+        firstName: $("#firstName").val(),
+        lastName: $("#lastName").val(),
+        dob: dob,
+        gender: $("input[name='gender']:checked").val(),
+        email: $("#email").val(),
+        contactNo: $("#contactNo").val(),
+        branch: $("#sub").find(":selected").text(),
+        rollno: $("#rollno").val(),
+        registrationDate: registrationDate,
+        parentName: $("#parentName").val(),
+        parentMobileNo: $("#parentMobileNo").val(),
+      };
+      $("#studentForm")[0].reset();
+      return student;
+    }
+
+    //store student data to localStorage
+    function storeDataToLocalStorage() {
+      if (!localStorage.getItem("student")) {
+        localStorage.setItem("student", JSON.stringify(getStudentData()));
+      } else {
+        localStorage.removeItem("student");
+        localStorage.setItem("student", JSON.stringify(getStudentData()));
+      }
+    }
+
+    //send data to server with AJAX request
+    function sendData() {
+      let xhr = new XMLHttpRequest();
+      let data = JSON.stringify(getStudentData());
+      xhr.open("POST", "http://localhost:4000/storedata",true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(data);
+    }
+
+    //call storeDataToLocalStorage and sendData functions
+    storeDataToLocalStorage();
+    // sendData();
+      window.location.href="display-data.html"
+  });
+});
+
+
+    </script>
+</head>
+
+<body style="background-color: white;">
+    <main class="mt-5 pt-3">
+        <div class="container">
+            <div class="container-fluid px-4">
+                <div class="row g-3 my-2">
+                    <div class="rounded">
+                        <div class="h1 my-4 text-center text-uppercase" style="color: seagreen; font-weight: bold;">Add
+                            Student Form</div>
+                        <form id="studentForm">
+                            <div class="p-3">
+                                <div class="row">
+                                    <div class="col-md-6 mt-md-3 mt-3">
+                                        <label>First Name</label>
+                                        <input type="text" id="firstName" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-6 mt-md-3 mt-3">
+                                        <label>Last Name</label>
+                                        <input type="text" id="lastName" class="form-control" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mt-md-3 mt-3">
+                                        <label>Birthday</label>
+                                        <input type="date" id="dob" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-6 mt-md-3 mt-3">
+                                        <label>Gender</label>
+                                        <div class="d-flex align-items-center mt-2">
+                                            <label class="option">
+                                                <input type="radio" name="gender" value="male" />
+                                                Male <span class="checkmark"></span>
+                                            </label>
+                                            <label class="option ms-4">
+                                                <input type="radio" name="gender" value="female" />
+                                                Female <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mt-md-3 mt-3">
+                                        <label>Email</label>
+                                        <input type="email" id="email" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-6 mt-md-3 mt-3">
+                                        <label>Phone Number</label>
+                                        <input type="tel" id="contactNo" class="form-control" required />
+                                    </div>
+                                </div>
+                                <div class="my-md-3 my-3">
+                                    <label>Branch</label>
+                                    <select id="sub" required>
+                                        <option value="" selected hidden>Choose Option</option>
+                                        <option value="Maths">IT</option>
+                                        <option value="Science">CSE</option>
+                                        <option value="Social">Mechanical</option>
+                                        <option value="Hindi">Civil</option>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mt-md-3 mt-3">
+                                        <label>Roll No</label>
+                                        <input type="text" id="rollno" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-6 mt-md-3 mt-3">
+                                        <label>Registration Date</label>
+                                        <input type="date" id="registrationDate" class="form-control" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mt-md-3 mt-3">
+                                        <label>Parent Name</label>
+                                        <input type="text" id="parentName" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-6 mt-md-3 mt-3">
+                                        <label>Parent Mobile No</label>
+                                        <input type="tel" id="parentMobileNo" class="form-control" required />
+                                    </div>
+                                </div>
+                                <div class="d-grid mt-4">
+                                    <button class="btn btn-lg" id="btnAddStudent" type="button" style="background-color: #1f5326;
+                      color: #fff;">
+                                        Add Student
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/jquery-3.5.1.js"></script>
+    <script src="./js/myscript.js"></script>
+</body>
+
+</html>
